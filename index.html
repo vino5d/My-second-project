@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aromalux-online perfume shop</title>
+    <link rel="stylesheet" href="style.css">
+  
+</head>
+
+<body>
+  <script>
+      function updateCartCount() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+    document.getElementById("cartCount").textContent = totalCount;
+      }
+
+
+    function addToCart(productName) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      let existing = cart.find(item => item.name === productName);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ name: productName, qty: 1 });
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(`${productName} added to cart`);
+      updateCartCount();
+    }
+    document.addEventListener("DOMContentLoaded",updateCartCount);
+
+     
+  </script>
+ 
+
+  <!-- Header -->
+  <header>
+    <h1>AromaLux</h1>
+    <nav>
+      <a href="#products">Shop</a>
+      <a href="#">About</a>
+      <a href="Cart.html" id="cartLink"> 
+      🛒<span id="cartCount" class="badge">0</span></a>
+      
+      
+    </nav>
+  </header>
+ 
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h2>Discover Your Signature Scent</h2>
+    <p>Luxury perfumes for every mood & moment.</p>
+    <a href="#products" class="btn">Shop Now</a>
+  </section>
+
+  <!-- Product Section -->
+  <section id="products">
+    <h2>Featured Perfumes</h2>
+    <div class="product-list">
+
+      <div class="product">
+        <img src="images/perfume1.jpg" alt="Perfume 1">
+        <h3>Rose Essence</h3>
+        <p>$45</p>
+        <button onclick="addToCart('Rose Essence')">Add to Cart</button>
+      </div>
+
+      <div class="product">
+        <img src="images/ocean.jpg" alt="Perfume 2">
+        <h3>Ocean Breeze</h3>
+        <p>$50</p>
+        <button onclick="addToCart('Ocean Breeze')">Add to Cart</button>
+      </div>
+
+      <div class="product">
+        <img src="images/perfume3.jpg" alt="Perfume 3">
+        <h3>Vanilla Musk</h3>
+        <p>$55</p>
+        <button onclick="addToCart('Vanilla Musk')">Add to Cart</button>
+      </div>
+
+      <div class="product">
+        <img src="images/chocoper.jpg" alt="Perfume 3">
+        <h3>French Coffee</h3>
+        <p>$60</p>
+        <button onclick="addToCart('French Coffee')">Add to Cart</button>
+      </div>
+
+      <div class="product">
+        <img src="images/floral.jpg" alt="Perfume 3">
+        <h3>Floral Nuit</h3>
+        <p>$70</p>
+        <button onclick="addToCart('Floral Nuit')">Add to Cart</button>
+      </div>
+
+      <div class="product">
+        <img src="images/Brut.jpg" alt="Perfume 3">
+        <h3>Brut</h3>
+        <p>$80</p>
+        <button onclick="addToCart('Brut')">Add to Cart</button>
+      </div>
+
+      
+      <div class="product">
+        <img src="images/Tulip.jpg" alt="Perfume 3">
+        <h3>Tulip</h3>
+        <p>$80</p>
+        <button onclick="addToCart('Brut')">Add to Cart</button>
+      </div>
+
+
+    </div>
+  </section>
+
+  <footer>
+    <!-- HTML -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-about">
+      <h3>About Us</h3>
+      <p>We build beautiful and functional websites tailored to your needs.</p>
+    </div>
+    <div class="footer-contact">
+      <h3>Contact Us</h3>
+      <ul>
+        <li>Email: info@example.com</li>
+        <li>Phone: +91 98765 43210</li>
+        <li>Address: Chennai, Tamil Nadu, India</li>
+      </ul>
+    </div>
+    <div class="footer-social">
+      <h3>Follow Us</h3>
+      <a href="#">Facebook</a> |
+      <a href="#">Twitter</a> |
+      <a href="#">LinkedIn</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 MyWebsite. All rights reserved.</p>
+  </div>
+</footer>
+       
+    
+    
+    
+
+
+
+
+  
+
+
+</body>
+</html>
+

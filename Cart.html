@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+</head>
+<body>
+  <style>
+  body{
+    background-color: rgb(163, 248, 129);
+  }
+  </style>
+  <center><h1>Your Shopping Cart</h1></center>
+
+  <!-- Cart items displayed here -->
+  <div id="cartContainer"></div>
+
+  <!-- Summary and Actions -->
+  <div id="cartSummary">
+    <p id="totalItems"></p>
+    <button id="clearBtn">Clear Cart</button>
+    
+  </div>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartContainer = document.getElementById("cartContainer");
+    const totalItemsDisplay = document.getElementById("totalItems");
+
+    function renderCart() {
+      console.log("🔄 renderCart() called");
+  console.log("Cart data:", cart);
+      cartContainer.innerHTML = "";
+
+      if (cart.length === 0) {
+        cartContainer.innerHTML = "<p style='text-align:center;'>🛒 Your cart is empty.</p>";
+        totalItemsDisplay.textContent = "";
+        return;
+      }
+
+      let table = document.createElement("table");
+      table.innerHTML = `
+        <tr>
+          <th>Product Name</th>
+          <th>Quantity</th>
+          <th>Action</th>
+        </tr>
+      `;
+
+      cart.forEach((item, index) => {
+        let row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${item.name}</td>
+          <td>${item.qty}</td>
+          <td><button onclick="removeItem(${index})">Remove</button></td>
+        `;
+        table.appendChild(row);
+      });
+
+      cartContainer.appendChild(table);
+
+      const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+      totalItemsDisplay.textContent = `Total Items: ${totalCount}`;
+    }
+
+    function removeItem(index) {
+      console.log(`items removed $(index)`);
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+    }
+
+    document.getElementById("clearBtn").addEventListener("click", () => {
+      if (confirm("Are you sure you want to clear the cart?")) {
+        localStorage.removeItem("cart");
+        cart = [];
+        renderCart();  //refresh the cart
+      }
+    });
+
+    renderCart(); // Initialize
+  </script>
+</body>
+
+      
+  
+      
+  
+   
+
+</html>
